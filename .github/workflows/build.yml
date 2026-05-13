@@ -1,4 +1,4 @@
-name: Flutter CI/CD
+name: Flutter Multi-Platform CI/CD
 
 on:
   push:
@@ -8,32 +8,51 @@ on:
 
 jobs:
   build_and_test:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+    name: Build on ${{ matrix.os }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Flutter
+      - name: Set up Flutter (Latest Stable)
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          flutter-version: '3.24.x'
 
-      - name: Install dependencies
+      - name: Install Linux build dependencies
+        if: matrix.os == 'ubuntu-latest'
+        run: sudo apt-get update && sudo apt-get install -y ninja-build libgtk-3-dev
+
+      - name: Install project dependencies
         run: flutter pub get
 
       - name: Run Code Generation
         run: dart run build_runner build --delete-conflicting-outputs
 
-      - name: Analyze code
-        run: flutter analyze
+      - name: Analyze and Test
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          flutter analyze
+          flutter test test/
 
-      - name: Run Unit & Widget Tests
-        run: flutter test test/
+      - name: Build Android, Web and Linux
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          flutter build apk --release
+          flutter build web --release
+          flutter build linux --release
 
-      - name: Build Android APK
-        run: flutter build apk --release
+      - name: Build iOS and macOS
+        if: matrix.os == 'macos-latest'
+        run: |
+          flutter build ios --release --no-codesign
+          flutter build macos --release --no-codesign
 
-      - name: Build Web App
-        run: flutter build web --release
+      - name: Build Windows
+        if: matrix.os == 'windows-latest'
+        run: flutter build windows --release
