@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import '../providers/library_provider.dart';
 
 class MapScreen extends ConsumerStatefulWidget {
@@ -43,7 +42,7 @@ class _MapScreenState extends ConsumerState<MapScreen> {
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Библиотека добавлена в ваш список!')),
+        const SnackBar(content: Text('Библиотека добавлена в ваш список!')),
       );
     }
   }

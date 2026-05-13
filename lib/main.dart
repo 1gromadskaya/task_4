@@ -36,7 +36,7 @@ class MyApp extends ConsumerWidget {
       routerConfig: router,
 
       locale: locale,
-      localizationsDelegates: [
+      localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,

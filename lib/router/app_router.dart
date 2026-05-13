@@ -6,7 +6,6 @@ import '../ui/home_screen.dart';
 import '../ui/detail_screen.dart';
 import '../ui/map_screen.dart';
 import '../providers/auth_provider.dart';
-import '../database/app_database.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final isLoggedIn = ref.watch(authProvider);
@@ -39,7 +38,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: '/map',
-        builder: (context, state) => MapScreen(),
+        builder: (context, state) => const MapScreen(),
       ),
     ],
   );

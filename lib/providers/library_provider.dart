@@ -33,7 +33,7 @@ class LibraryNotifier extends StateNotifier<List<Library>> {
         address: address,
         latitude: lat,
         longitude: lon,
-        district: Value('Минск'),
+        district: const Value('Минск'),
       ),
     );
     await fetchLibraries();
@@ -57,7 +57,7 @@ class LibraryNotifier extends StateNotifier<List<Library>> {
           address: data['address'],
           latitude: data['lat'],
           longitude: data['lon'],
-          district: Value('Минск'),
+          district: const Value('Минск'),
         ),
       );
     }
