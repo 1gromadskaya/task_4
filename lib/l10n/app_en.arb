@@ -1,0 +1,15 @@
+{
+  "@@locale": "en",
+  "appTitle": "Minsk Libraries",
+  "settings": "Settings",
+  "libraries": "Libraries",
+  "emptyList": "List is empty. Add a library!",
+  "logout": "Logout",
+  "login": "Login",
+  "theme": "App Theme",
+  "language": "App Language",
+  "clearCache": "Clear cache (delete all)",
+  "appVersion": "App Version",
+  "attendance": "Weekly Attendance",
+  "visitors": "Visitors"
+}
